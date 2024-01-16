@@ -1,8 +1,10 @@
+import enums.Hair;
 import exceptions.InvalidLocationException;
 import objects.*;
 import people.*;
 import people.clothing.BlackSuit;
 import people.clothing.BlueDress;
+import people.clothing.Clothing;
 import places.Church;
 import places.Room;
 
@@ -53,9 +55,33 @@ public class Main {
         jude.tilt(60, ellie);
         jude.speak("Молодец, что пришла, малышка. Думаю, Норма тоже рада.");
         ellie.lookAt(jude);
+        God god = new God("Бог");
+        ReverendMcLaughlin reverendMcLaughlin = new ReverendMcLaughlin();
+        reverendMcLaughlin.prayWithFaith(god, norma);
+        class Hairdresser {
+            public void newHairColor(Human person, Hair hair) {
+                person.newHairColor(hair);
+            }
+        }
+        (new Hairdresser()).newHairColor(norma, Hair.BLONDE);
+        reverendMcLaughlin.speak("Готовы ли носильщики?");
+        louis.standUp(ellie);
+        ellie.whisper("Папа! Ты куда?");
+        louis.whisper("Я один из носильщиков, дорогая");
+        ellie.releaseHands(louis);
+        louis.sitDown(ellie);
+        louis.speak("Мы должны вынести Норму. Вчетвером — я, двое племянников Джуда и брат Нормы.");
+        ellie.speak("А как я тебя найду?");
+        louis.lookAt(jude);
+        NormaBrother normaBrother = new NormaBrother();
+        FirstJudeNephew firstJudeNephew = new FirstJudeNephew();
+        SecondJudeNephew secondJudeNephew = new SecondJudeNephew();
+        jude.checkCarriers(normaBrother, firstJudeNephew, secondJudeNephew);
         louis.speak("Сойдешь со ступенек, и я буду там.");
         ellie.speak("Ну хорошо. Только не потеряйся.");
         louis.speak("Нет-нет.");
+        ellie.getLeftShoulder().takeArm();
+        louis.standUp(ellie);
         ellie.speak("Папа?");
         louis.speak("Что, малышка?");
         ellie.whisper("Смотри не урони ее.");

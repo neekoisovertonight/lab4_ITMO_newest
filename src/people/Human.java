@@ -2,6 +2,8 @@ package people;
 
 import actions.Tearable;
 import enums.Gender;
+import enums.Hair;
+import exceptions.NoFaithException;
 import objects.Bed;
 import objects.Bench;
 import objects.LocationObject;
@@ -24,7 +26,25 @@ public abstract class Human {
         this.name = name;
     }
 
+    public boolean isCrying() {
+        return isCrying;
+    }
+
+    public void setCrying(boolean crying) {
+        isCrying = crying;
+    }
+
     protected boolean isCrying;
+
+    public boolean isBeliever() {
+        return isBeliever;
+    }
+
+    public void setBeliever(boolean believer) {
+        isBeliever = believer;
+    }
+
+    protected boolean isBeliever;
 
     public boolean isDead() {
         return isDead;
@@ -201,8 +221,8 @@ public abstract class Human {
     }
 
     public void shakeHand() {
-        if (!leftArm.isOccupied()) {
-            leftArm.shakeHands();
+        if (!rightArm.isOccupied()) {
+            rightArm.shakeHands();
             mood--;
             System.out.println(name + " трясет рукой. Самочувствие: " + mood);
         } else {
@@ -255,23 +275,25 @@ public abstract class Human {
             }
         }
     }
+
     public void sleep() {
         mood = 0;
         System.out.println(name + " спит. Самочувствие обнулено.");
     }
 
-    public void lookFromTheSide(Human human){
+    public void lookFromTheSide(Human human) {
         System.out.println(name + " смотрит на " + human.getName() + ". Направление: " + human.getLocation());
         think("Передо мной классический пример ребенка, переживающего важный переходный этап своей жизни и еще не понимающего, что происходит с ним");
         human.transitionLive();
     }
 
-    private void transitionLive(){
+    private void transitionLive() {
         System.out.println(name + " переживает важный переходный этап своей жизни и не понимает что происходит с ней.");
         worsenMood(5);
         body.minusTemperatureByGender();
         shiveringEffect.addShivering();
     }
+
     public void tilt(int degrees, Human human) {
         System.out.println(name + " наклонился на " + degrees + " градусов.");
         kiss(human);
@@ -286,13 +308,87 @@ public abstract class Human {
     }
 
     private boolean areAdjacent(Human person1, Human person2) {
-        return Math.abs(person1.getLocation().getY() - person2.getLocation().getY()) == 1;
+        return Math.abs(person1.getLocation().getY() - person2.getLocation().getY()) <= 1;
     }
 
-    public void lookAt(Human human){
+    public void lookAt(Human human) {
         System.out.println(name + " смотрит на " + human.getName() + ". Направление: " + human.getLocation());
-        think("Я должна сохранять спокойствие.");
+        think("Я сохраняю спокойствие.");
         mood = 0;
         System.out.println("Самочувствие обнулено.");
+    }
+
+    public void prayWithFaith(God god, Human human) throws NoFaithException {
+        if (!isBeliever) {
+            throw new NoFaithException("Этот человек не верит в бога и не может молиться с верой.");
+        }
+        Prayer prayingAction = new Prayer() {
+            @Override
+            public void pray() {
+                speak("Молитва за " + human.getName() + " с верой в " + god.getName());
+                System.out.println("Благословление " + human.getName() + " даровано.");
+                human.improveMood(10);
+            }
+        };
+        prayingAction.pray();
+    }
+
+    public void standUp(Human human) {
+        if (!leftArm.isOccupied() || !rightArm.isOccupied()) {
+            System.out.println(name + " встает.");
+            setLocation(new Point(getLocation().x, getLocation().y + 1));
+            System.out.println("Новое местоположение: " + getLocation());
+            human.grab(this);
+        } else {
+            System.out.println(name + " встает");
+            setLocation(new Point(getLocation().x, getLocation().y + 1));
+        }
+    }
+
+    public void grab(Human otherPerson) {
+        if (areAdjacent(this, otherPerson)) {
+            if (!leftArm.isOccupied() && !otherPerson.leftArm.isOccupied()) {
+                leftArm.holdHands();
+                otherPerson.leftArm.holdHands();
+                System.out.println(name + " хватает за руку " + otherPerson.getName());
+            } else if (!rightArm.isOccupied() && !otherPerson.rightArm.isOccupied()) {
+                rightArm.holdHands();
+                otherPerson.rightArm.holdHands();
+                System.out.println(name + " хватает за руку " + otherPerson.getName());
+            } else {
+                System.out.println("Все руки заняты.");
+            }
+        } else {
+            System.out.println("Чтобы взять за руку, они должны стоять на соседних точках.");
+        }
+    }
+
+    public void newHairColor(Hair hair) {
+        this.head.setHairColor(hair);
+    }
+
+    public void sitDown(Human human) {
+        location.setLocation(location.getX(), location.getY() - 1);
+        System.out.println(name + " присел. Новые координаты: " + location);
+        putHandOnShoulder(human);
+    }
+
+    public void putHandOnShoulder(Human otherPerson) {
+        if (!rightArm.isOccupied()) {
+            otherPerson.leftShoulder.placeArm(rightArm);
+            System.out.println(name + " положил руку на плечо " + otherPerson.getName());
+        } else if (!leftArm.isOccupied()) {
+            otherPerson.rightShoulder.placeArm(leftArm);
+            System.out.println(name + " положил руку на плечо " + otherPerson.getName());
+        } else {
+            System.out.println("Плечо " + otherPerson.getName() + " занято.");
+        }
+    }
+
+    public boolean areAdjacentTo(Human judah) {
+        double xDifference = Math.abs(location.getX() - judah.getLocation().getX());
+        double yDifference = Math.abs(location.getY() - judah.getLocation().getY());
+
+        return yDifference <= 3 && xDifference == 0;
     }
 }

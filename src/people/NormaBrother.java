@@ -15,5 +15,6 @@ import java.awt.*;
 public class NormaBrother extends Human{
     public NormaBrother() {
         super(new NormaBrotherHead(), new Arm(new Hand(BodySide.LEFT)), new Arm(new Hand(BodySide.RIGHT)), new Shoulder(), new Shoulder(), new LouisBody(), Gender.MALE, "Брат Нормы", 50, new Point(5, 5));
+        displayCreationInfo();
     }
 }
