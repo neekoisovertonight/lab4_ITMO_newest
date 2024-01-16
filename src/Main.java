@@ -28,6 +28,7 @@ public class Main {
         rachel.speak("О, Луис, я даже не знаю. Она еще маленькая...");
         louis.speak("Но она уже год знает, откуда берутся дети");
         rachel.stareAtCeiling();
+        rachel.speak("Если тебе кажется, что так нужно, можешь ее взять.");
         louis.speak("Давай спать.");
         louis.releaseHands(rachel);
         louis.sleep();

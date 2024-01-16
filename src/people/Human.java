@@ -214,7 +214,7 @@ public abstract class Human {
         if (!rightArm.isOccupied()) {
             rightArm.shakeHands();
             mood--;
-            System.out.println(name + " трясет рукой. Самочувствие: " + mood);
+            System.out.println(name + " трясет правой рукой. Самочувствие: " + mood);
         } else {
             System.out.println("Рука занята.");
         }
@@ -224,7 +224,6 @@ public abstract class Human {
         head.tilt(90);
         System.out.println(name + " смотрит в потолок.");
         think("Что делать?");
-        speak("Если тебе кажется, что так нужно, можешь ее взять.");
     }
 
     public void hug(Human other) {

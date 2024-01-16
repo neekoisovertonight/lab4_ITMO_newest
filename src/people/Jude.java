@@ -19,5 +19,4 @@ public class Jude extends Human {
         super(new JudeHead(), new Arm(new Hand(BodySide.LEFT)), new Arm(new Hand(BodySide.RIGHT)), new Shoulder(), new Shoulder(), new JudeBody(), Gender.MALE, "Джуд", 40, new Point(4, 5));
         displayCreationInfo();
     }
-
 }
