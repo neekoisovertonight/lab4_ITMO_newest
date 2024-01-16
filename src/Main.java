@@ -63,12 +63,6 @@ public class Main {
         ReverendMcLaughlin reverendMcLaughlin = new ReverendMcLaughlin();
         church.addPerson(reverendMcLaughlin);
         reverendMcLaughlin.prayWithFaith(god, norma);
-        class Hairdresser {
-            public void newHairColor(Human person, Hair hair) {
-                person.newHairColor(hair);
-            }
-        }
-        (new Hairdresser()).newHairColor(norma, Hair.BLONDE);
         reverendMcLaughlin.speak("Готовы ли носильщики?");
         louis.standUp(ellie);
         ellie.whisper("Папа! Ты куда?");

@@ -315,6 +315,12 @@ public abstract class Human {
                 speak("Молитва за " + human.getName() + " с верой в " + god.getName());
                 System.out.println("Благословление " + human.getName() + " даровано.");
                 human.improveMood(10);
+                class Hairdresser {
+                    public void newHairColor(Human person, Hair hair) {
+                        person.newHairColor(hair);
+                    }
+                }
+                (new Hairdresser()).newHairColor(human, Hair.BLONDE);
             }
         };
         prayingAction.pray();
@@ -330,6 +336,10 @@ public abstract class Human {
             System.out.println(name + " встает");
             setLocation(new Point(getLocation().x, getLocation().y + 1));
         }
+    }
+
+    void newHairColor(Hair hair) {
+        this.head.setHairColor(hair);
     }
 
     public void grab(Human otherPerson) {
@@ -348,10 +358,6 @@ public abstract class Human {
         } else {
             System.out.println("Чтобы взять за руку, они должны стоять на соседних точках.");
         }
-    }
-
-    public void newHairColor(Hair hair) {
-        this.head.setHairColor(hair);
     }
 
     public void sitDown(Human human) {
