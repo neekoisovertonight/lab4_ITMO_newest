@@ -318,6 +318,7 @@ public abstract class Human {
                 class Hairdresser {
                     public void newHairColor(Human person, Hair hair) {
                         person.newHairColor(hair);
+                        System.out.println("Цвет волос " + person.getName() + " изменен на " + hair.getName());
                     }
                 }
                 (new Hairdresser()).newHairColor(human, Hair.BLONDE);
