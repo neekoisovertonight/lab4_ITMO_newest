@@ -41,8 +41,11 @@ public class Main {
         Coffin coffin = new Coffin("Гроб", new Point(5, 10));
         coffin.occupySpace(church);
         Norma norma = new Norma();
+        church.addPerson(louis);
+        church.addPerson(norma);
         coffin.setOccupant(norma);
         Ellie ellie = new Ellie();
+        church.addPerson(ellie);
         ellie.interactWith(bench);
         BlueDress blueDress = new BlueDress();
         ellie.getBody().wearClothing(blueDress);
@@ -52,11 +55,13 @@ public class Main {
         Jude jude = new Jude();
         BlackSuit blackSuit = new BlackSuit();
         jude.getBody().wearClothing(blackSuit);
+        church.addPerson(jude);
         jude.tilt(60, ellie);
         jude.speak("Молодец, что пришла, малышка. Думаю, Норма тоже рада.");
         ellie.lookAt(jude);
         God god = new God("Бог");
         ReverendMcLaughlin reverendMcLaughlin = new ReverendMcLaughlin();
+        church.addPerson(reverendMcLaughlin);
         reverendMcLaughlin.prayWithFaith(god, norma);
         class Hairdresser {
             public void newHairColor(Human person, Hair hair) {
@@ -76,6 +81,9 @@ public class Main {
         NormaBrother normaBrother = new NormaBrother();
         FirstJudeNephew firstJudeNephew = new FirstJudeNephew();
         SecondJudeNephew secondJudeNephew = new SecondJudeNephew();
+        church.addPerson(normaBrother);
+        church.addPerson(firstJudeNephew);
+        church.addPerson(secondJudeNephew);
         jude.checkCarriers(normaBrother, firstJudeNephew, secondJudeNephew);
         louis.speak("Сойдешь со ступенек, и я буду там.");
         ellie.speak("Ну хорошо. Только не потеряйся.");
