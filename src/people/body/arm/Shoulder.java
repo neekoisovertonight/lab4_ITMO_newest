@@ -10,16 +10,16 @@ public class Shoulder {
     public void placeArm(Arm arm) {
         if (this.arm == null) {
             this.arm = arm;
-            System.out.println("Placed arm on the shoulder.");
+            System.out.println("Рука на плече.");
         } else {
-            System.out.println("Shoulder is already occupied.");
+            System.out.println("Плечо уже занято.");
         }
     }
 
     public Arm takeArm() {
         Arm takenArm = this.arm;
         this.arm = null;
-        System.out.println("Took arm from the shoulder.");
+        System.out.println("Рука убрана с плеча.");
         return takenArm;
     }
 }

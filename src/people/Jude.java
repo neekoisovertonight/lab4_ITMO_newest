@@ -31,16 +31,20 @@ public class Jude extends Human {
     }
 
     private void updateCarriersLocations(Human carrier1, Human carrier2, Human carrier3) {
-        Random random = new Random();
-        int randomShift = random.nextInt(3) + 1;
-        int judahX = (int) getLocation().getX();
-        int judahY = (int) getLocation().getY();
+        class LocationUpdater {
+            private void updateLocation(Human carrier) {
+                Random random = new Random();
+                int randomShift = random.nextInt(3) + 1;
+                int judahX = (int) getLocation().getX();
+                carrier.getLocation().setLocation(judahX, carrier.getLocation().getY() + randomShift);
+            }
+        }
 
-        carrier1.getLocation().setLocation(judahX, carrier1.getLocation().getY() + randomShift);
-        carrier2.getLocation().setLocation(judahX, carrier2.getLocation().getY() + randomShift);
-        carrier3.getLocation().setLocation(judahX, carrier3.getLocation().getY() + randomShift);
+        LocationUpdater locationUpdater = new LocationUpdater();
 
-
+        locationUpdater.updateLocation(carrier1);
+        locationUpdater.updateLocation(carrier2);
+        locationUpdater.updateLocation(carrier3);
         System.out.println("Носильщики переставлены. Новые координаты:");
         System.out.println(carrier1.getName() + ": " + carrier1.getLocation());
         System.out.println(carrier2.getName() + ": " + carrier2.getLocation());
