@@ -1,6 +1,5 @@
 package people;
 
-import actions.Tearable;
 import enums.Gender;
 import enums.Hair;
 import exceptions.NoFaithException;
@@ -228,18 +227,6 @@ public abstract class Human {
         } else {
             System.out.println("Рука занята.");
         }
-    }
-
-    public void cry() {
-        class Tear implements Tearable {
-            @Override
-            public void shedTear() {
-                System.out.print("Слеза катится по щеке. ");
-            }
-        }
-        Tear tear = new Tear();
-        tear.shedTear();
-        worsenMood(10);
     }
 
     public void stareAtCeiling() {
