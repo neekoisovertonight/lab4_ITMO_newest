@@ -25,16 +25,6 @@ public abstract class Human {
         this.name = name;
     }
 
-    public boolean isCrying() {
-        return isCrying;
-    }
-
-    public void setCrying(boolean crying) {
-        isCrying = crying;
-    }
-
-    protected boolean isCrying;
-
     public boolean isBeliever() {
         return isBeliever;
     }
