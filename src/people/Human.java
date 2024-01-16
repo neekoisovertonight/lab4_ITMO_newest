@@ -286,7 +286,7 @@ public abstract class Human {
         kiss(human);
     }
 
-    public void kiss(Human otherPerson) {
+    private void kiss(Human otherPerson) {
         if (areAdjacent(this, otherPerson)) {
             System.out.println(name + " поцеловал " + otherPerson.getName());
         } else {
