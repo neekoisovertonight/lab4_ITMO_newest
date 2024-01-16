@@ -15,7 +15,7 @@ import java.awt.*;
 public class ReverendMcLaughlin extends Human {
     public ReverendMcLaughlin() {
         super(new ReverendHead(), new Arm(new Hand(BodySide.LEFT)), new Arm(new Hand(BodySide.RIGHT)), new Shoulder(), new Shoulder(), new LouisBody(), Gender.MALE, "Преподобный Лафлин", 45, new Point(4, 5));
-        isBeliever = true;
+        this.isBeliever = true;
         displayCreationInfo();
     }
 }
