@@ -20,34 +20,4 @@ public class Jude extends Human {
         displayCreationInfo();
     }
 
-    public void checkCarriers(Human carrier1, Human carrier2, Human carrier3) {
-        if (carrier1.areAdjacentTo(this) && carrier2.areAdjacentTo(this) && carrier3.areAdjacentTo(this)) {
-            System.out.println("Все носильщики подошли к Джуду.");
-        } else {
-            System.out.println("Кто-то из носильщиков не подошел к Джуду.");
-            updateCarriersLocations(carrier1, carrier2, carrier3);
-            checkCarriers(carrier1, carrier2, carrier3);
-        }
-    }
-
-    private void updateCarriersLocations(Human carrier1, Human carrier2, Human carrier3) {
-        class LocationUpdater {
-            private void updateLocation(Human carrier) {
-                Random random = new Random();
-                int randomShift = random.nextInt(3) + 1;
-                int judahX = (int) getLocation().getX();
-                carrier.getLocation().setLocation(judahX, carrier.getLocation().getY() + randomShift);
-            }
-        }
-
-        LocationUpdater locationUpdater = new LocationUpdater();
-
-        locationUpdater.updateLocation(carrier1);
-        locationUpdater.updateLocation(carrier2);
-        locationUpdater.updateLocation(carrier3);
-        System.out.println("Носильщики переставлены. Новые координаты:");
-        System.out.println(carrier1.getName() + ": " + carrier1.getLocation());
-        System.out.println(carrier2.getName() + ": " + carrier2.getLocation());
-        System.out.println(carrier3.getName() + ": " + carrier3.getLocation());
-    }
 }
